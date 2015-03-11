@@ -26,13 +26,10 @@ object LTLSat {
       println(s"Satisfiable with bound: ${(r, s)}?")
       val z3encoding = LTLtoZ3(e, r, s).mkString("\n")
       println("Done encoding, passing to z3")
-      println(z3encoding)
       val input = new ByteArrayInputStream(z3encoding.getBytes)
       val z3out = ("z3 -smt2 -in" #< input).lines_!
       println("Done with z3, extracting model from output")
       val isSat :: model = z3out.mkString("\n").split("\n").toList
-      println(isSat)
-      println(model.mkString("\n"))
       if (isSat == "sat") {
         println("Formula is satisfiable within current bounds")
         extractmodel(model)
@@ -90,7 +87,7 @@ object LTLtoZ3 {
         case Not(f)    => not(expand(f, i, r, s))
         case False()   => "false"
         case True()    => "true"
-        case p: Prop   => s"(${p.s}, i)"
+        case p: Prop   => s"(${p.s} $i)"
         case Next(f)   => expand(f, succ(i), r, s)
 
         case Until(f, g) =>

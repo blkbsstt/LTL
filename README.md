@@ -36,3 +36,52 @@ This can be encoded in the DSL as follows:
 
     val constraints = G(/\(exists, distinct, boatcap, jealousy, driver, travel, patience))
 ```
+
+Running LTL.scala yields
+
+```
+Satisfiable with bound: (33,1)?
+Done encoding, passing to z3
+Done with z3, extracting model from output
+Formula is satisfiable within current bounds
+ 0: m1 m2 m3 w1 w2 w3 | *                     |
+ 1: m1 m2    w1 w2    | *       m3       w3   |
+ 2: m1 m2    w1 w2    |         m3       w3 * |
+ 3: m1 m2    w1 w2    |                     * |       m3       w3
+ 4: m1 m2    w1 w2    |         m3          * |                w3
+ 5: m1 m2    w1 w2    | *       m3            |                w3
+ 6: m1 m2 m3 w1 w2    | *                     |                w3
+ 7: m1 m2 m3          | *          w1 w2      |                w3
+ 8: m1 m2 m3          |            w1 w2    * |                w3
+ 9: m1 m2 m3          |                     * |          w1 w2 w3
+10: m1 m2 m3          |            w1       * |             w2 w3
+11: m1 m2 m3          | *          w1         |             w2 w3
+12: m1 m2 m3 w1       | *                     |             w2 w3
+13: m1       w1       | *    m2 m3            |             w2 w3
+14: m1       w1       |      m2 m3          * |             w2 w3
+15: m1       w1       |                     * |    m2 m3    w2 w3
+16: m1       w1       |      m2       w2    * |       m3       w3
+17: m1       w1       | *    m2       w2      |       m3       w3
+18: m1 m2    w1 w2    | *                     |       m3       w3
+19:          w1 w2    | * m1 m2               |       m3       w3
+20:          w1 w2    |   m1 m2             * |       m3       w3
+21:          w1 w2    |                     * | m1 m2 m3       w3
+22:          w1 w2    |                  w3 * | m1 m2 m3
+23:          w1 w2    | *                w3   | m1 m2 m3
+24:          w1 w2 w3 | *                     | m1 m2 m3
+25:                w3 | *          w1 w2      | m1 m2 m3
+26:                w3 |            w1 w2    * | m1 m2 m3
+27:                w3 |                     * | m1 m2 m3 w1 w2
+28:                w3 |         m3          * | m1 m2    w1 w2
+29:                w3 | *       m3            | m1 m2    w1 w2
+30:       m3       w3 | *                     | m1 m2    w1 w2
+31:                   | *       m3       w3   | m1 m2    w1 w2
+32:                   |         m3       w3 * | m1 m2    w1 w2
+33:                   |                     * | m1 m2 m3 w1 w2 w3
+```
+
+So the problem has a solution, and the model of the solution is
+given. All the solving is done through encoding LTL into SMT formulas
+(specifically EUF) and calling Z3. The output of Z3 is parsed and
+provided to the problem to be displayed in a customized fashion (such
+as producing a table like the one above).

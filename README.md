@@ -29,7 +29,7 @@ This can be encoded in the DSL as follows:
     val boatcap = /\((for (p <- P) yield p + b).toSeq.combinations(3).map(/\).map(¬))
     val jealousy = /\(for (k <- L; i <- C) yield (w + i + k) -> ((m + i + k) \/ (/\(for (j <- C - i) yield ¬(m + j + k)))))
     val driver = /\(for (k <- S) yield ->(b + k, W(b + k, \/(for (p <- P) yield (p + b)))))
-    val patienke = /\(for (k <- S; p <- P; n <- S - k) yield ((p + k) /\ (b + n) /\ X(b + k)) -> ¬(X(p + b) \/ X(X(p + b))))
+    val patience = /\(for (k <- S; p <- P; n <- S - k) yield ((p + k) /\ (b + n) /\ X(b + k)) -> ¬(X(p + b) \/ X(X(p + b))))
     val travel = /\(for (k <- S; p <- P; n <- S - k) yield (p + k) -> W(p + k,
       ((b + k) /\ (p + k)) /\ //the boat is here
         X((b + k) /\ (p + b)) /\ //i get on the boat

@@ -8,7 +8,7 @@ You can find two example problems in Problem.scala as well (one quite simple, th
 
 You can use sbt to run it. Modify LTL.scala to change the run options. Command-line arguments are TODO.
 
-Z3 is a requirement. `brew install z3` is sufficient on a Mac.
+Z3 is a requirement. `brew install homebrew/science/z3` is sufficient on a Mac.
 
 DSL
 ---

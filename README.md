@@ -17,6 +17,14 @@ For an example of using the LTL DSL, consider the following formulation of a pro
 Also, the six people are 3 couples, with jealous husbands, such that no woman may be around another man without also being around her husband.
 The boat cannot cross the river without someone in it.
 
+We can encode this problem in LTL as follows: create a set of boolean propositions representing the possible positions of each person and the boat. Each person and their position can be referred to precisely by if the person is a man or woman: {m, w}, which couple they are a part of: C = {1, 2, 3}, and where they are: L = {l, b, r} (left, boat, right). The boat, b, can also be referred to by which side it is on: S = {l, r}. As a shorthand, let's call the set of people (without specified locations) P = {m1, m2, m3, w1, w2, w3}.
+
+There are 20 possible propositions representing the state of the world:
+
+    {m1l, m1b, m1r, m2l, m2b, m2r, m3l, m3b, m3r, w1l, w1b, w1r, w2l, w2b, w2r, w3l, w3b, w3r, bl, br}
+
+We can constrain the possible states of these propositions with the following LTL formula, `constraints`.
+
 ![boat problem](boat.png)
 
 *Note that b_k in patience should be Xb_k.*
